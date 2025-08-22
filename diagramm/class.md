@@ -3,14 +3,13 @@
 title: Animal example
 ---
 classDiagram
-
+    
 
     class User{
         +int id_user
         +String name
         +String email
         +String avatar
-        +text post
         -text password
         +toJson()
         +fromJson()
