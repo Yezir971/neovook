@@ -1,6 +1,7 @@
 import { Body, Controller, Get, Post } from "@nestjs/common";
 import { UsersService } from "./users.service";
 import { User } from "./entity/user.entity";
+import { Public } from "src/common/decorators/public.decorato";
 
 @Controller('api')
 export class UsersController{
@@ -12,6 +13,7 @@ export class UsersController{
         return data
     }
 
+    @Public()
     @Post("user/create")
     async createUser(@Body() user: User){
         return await this.usersService.createUser(user)
