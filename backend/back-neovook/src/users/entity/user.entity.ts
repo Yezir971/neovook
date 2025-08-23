@@ -36,7 +36,6 @@ export class User {
     type: 'varchar',
     nullable: false,
   })
-
   password: string; 
   @BeforeInsert()
   async hashPassword() {
