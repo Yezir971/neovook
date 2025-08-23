@@ -11,7 +11,8 @@
 
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { User } from './user.entity';
+import { User } from './users/entity/user.entity';
+import { UsersModule } from './users/users.module';
 
 
 @Module({
@@ -26,6 +27,7 @@ import { User } from './user.entity';
       entities: [User],
       synchronize: true,
     }),
+    UsersModule,
   ],
 })
 export class AppModule {}
