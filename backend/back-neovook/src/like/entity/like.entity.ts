@@ -14,13 +14,19 @@ export class Like {
     })
     liked_at: Date
 
-    @ManyToOne(() => User, user => user.id_user, { eager: true })
+    @ManyToOne(() => User)
     @JoinColumn({ name: 'user_id_who_like' })
-    user_id_who_like: User;
+    user: User;
 
-    @ManyToOne(() => Article, article => article.id_post, { onDelete: 'CASCADE' })
+    @Column()
+    user_id_who_like: string;
+
+    @ManyToOne(() => Article, { onDelete: 'CASCADE' })
     @JoinColumn({ name: 'article_id' })
-    article_id: Article;
+    article: Article;
+
+    @Column()
+    article_id: string;
 
     // @ManyToOne(() => Article, (post) => post.likes, { onDelete: 'CASCADE' })
     // article: Article;

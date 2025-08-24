@@ -39,12 +39,16 @@ export class User {
     nullable: false,
     select: false
   })
-
-
   password: string; 
+
+  @OneToMany(() => Article, article => article.id_user_who_post)
+  articles: Article[];
+
+  @OneToMany(() => Like, like => like.user)
+  likes: Like[];
+
   @BeforeInsert()
   async hashPassword() {
-    this.password = await bcrypt.hash(this.password, 10);
+    this.password = await bcrypt.hash(this.password, 10); 
   }
-
 }

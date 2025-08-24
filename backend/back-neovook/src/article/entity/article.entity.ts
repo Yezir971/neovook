@@ -19,7 +19,6 @@ export class Article {
   })
   body: string;
 
-
   @Column({
     type: 'date',
     nullable: false
@@ -32,18 +31,10 @@ export class Article {
   })
   edit_at: Date
 
-  @Column({
-    type: 'varchar',
-    nullable: false
-  })
-
-
-  @ManyToOne(() => User, (user) => user.id_user, { eager: true })
+  @ManyToOne(() => User, (user) => user.articles, { eager: true })
   @JoinColumn({ name: 'id_user_who_post' }) 
   id_user_who_post: User; 
 
-
-  // @OneToMany(() => Like, (like) => like.id_like, { eager: true })
-  // likes: Array<Like>;
-
+  @OneToMany(() => Like, like => like.article, {eager : false})
+  likes: Like[];
 }
