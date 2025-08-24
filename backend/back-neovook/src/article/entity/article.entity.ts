@@ -1,3 +1,4 @@
+import { Like } from 'src/like/entity/like.entity';
 import { User } from 'src/users/entity/user.entity';
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany, ManyToOne, JoinColumn } from 'typeorm';
 
@@ -41,10 +42,8 @@ export class Article {
   @JoinColumn({ name: 'id_user_who_post' }) 
   id_user_who_post: User; 
 
-  @Column({
-    type: 'varchar',
-    nullable: false
-  })
-  id_like: string;
+
+  // @OneToMany(() => Like, (like) => like.id_like, { eager: true })
+  // likes: Array<Like>;
 
 }

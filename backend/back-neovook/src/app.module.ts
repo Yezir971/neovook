@@ -1,14 +1,3 @@
-// import { Module } from '@nestjs/common';
-// import { AppController } from './app.controller';
-// import { AppService } from './app.service';
-
-// @Module({
-//   imports: [],
-//   controllers: [AppController],
-//   providers: [AppService],
-// })
-// export class AppModule {}
-
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './users/entity/user.entity';
@@ -17,6 +6,8 @@ import { AuthModule } from './auth/auth.module';
 import { ArticleModule } from './article/article.module';
 import { Article } from './article/entity/article.entity';
 import { ConfigModule } from '@nestjs/config';
+import { LikeModule } from './like/like.module';
+import { Like } from './like/entity/like.entity';
 
 
 @Module({
@@ -29,12 +20,13 @@ import { ConfigModule } from '@nestjs/config';
       username: 'root',
       password: '',
       database: 'neovook',
-      entities: [User, Article],
+      entities: [User, Article, Like],
       synchronize: true,
     }),
     UsersModule,
     AuthModule,
     ArticleModule,
+    LikeModule,
   ],
 })
 export class AppModule {}

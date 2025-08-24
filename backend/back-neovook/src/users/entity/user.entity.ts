@@ -1,6 +1,7 @@
 import { Entity, Column, PrimaryGeneratedColumn, BeforeInsert, OneToMany } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 import { Article } from 'src/article/entity/article.entity';
+import { Like } from 'src/like/entity/like.entity';
 
 @Entity()
 export class User {
@@ -45,4 +46,5 @@ export class User {
   async hashPassword() {
     this.password = await bcrypt.hash(this.password, 10);
   }
+
 }
