@@ -96,7 +96,6 @@ export class LikeService {
             },
             relations: ['user'],
         });
-        console.log(allLike[0].user_id_who_like);
         
 
         return allLike
