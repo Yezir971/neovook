@@ -7,3 +7,10 @@ export type articleCreateBodyDto = {
 export type articleDeleteBodyDto = {
     id_post: string
 }
+
+export type articleUpdateBodyDto ={
+    id_post: string
+    title : string;
+    body: string ; 
+    edit_at: Date;
+}
