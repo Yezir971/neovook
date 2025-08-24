@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Article } from './entity/article.entity';
 import { Repository } from 'typeorm';
+import { articleDeleteBodyDto } from 'src/models/article.models';
 
 @Injectable()
 export class ArticleService {
@@ -9,6 +10,9 @@ export class ArticleService {
 
     }
 
+    async getArticle(article : articleDeleteBodyDto) {
+        return this.articleRepository.findOneBy({['id_post'] : article.id_post})
+    }
     async createArtcile(article : Article) : Promise<String>{
         try {
             const newArticle = this.articleRepository.create(article); 
@@ -19,6 +23,20 @@ export class ArticleService {
             console.error('Erreur création de l\' article:', error); 
             throw new Error("Une erreur s'est produite au niveau de la création de l\' article");
         }
+    }
+
+    async deleteArticle(article : articleDeleteBodyDto) : Promise<String>{
+        try {
+            const articleDelete = this.articleRepository.delete(article)
+            return "article supprimer avec succèss"
+        } catch (error) {
+            console.error('Erreur lors de la suppression de l\' article:', error); 
+            throw new Error("Une erreur s'est produite au moment de la suppression de l\' article");
+        }
+    }
+
+    async getArticleById(articleId : string){
+        return this.articleRepository.findOneBy({['id_post'] : articleId})
 
     }
 
