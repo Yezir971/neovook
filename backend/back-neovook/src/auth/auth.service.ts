@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable, NotFoundException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { compare } from 'bcrypt';
 import { AuthBodyDto } from 'src/models/auth.models';
@@ -19,18 +19,17 @@ export class AuthService {
         if (!isPasswordValid) {
             throw new NotFoundException({error: "Mot de passe ou nom d'utilisateur incorrect",});
         }   
-
-        return this.authentificateUser({userId : existingUser.id_user})
-        
+        const token = await this.authentificateUser({userId : existingUser.id_user})
+        throw new HttpException(token, HttpStatus.OK);
+        // return this.authentificateUser({userId : existingUser.id_user})
     }
 
     async getProfile(name: string){
         const user = await this.usersService.getUser(name)
         if(!user){
-            throw new NotFoundException('Utilisateur non trouvé')
-
+            throw new HttpException("Utilisateur non trouvé", HttpStatus.NOT_FOUND);
         }
-        return {userName : user.name, userId  : user.id_user}
+        throw new HttpException({userName : user.name, userId  : user.id_user}, HttpStatus.OK);
     }
 
     // méthode pour vérifier un mot de passe 

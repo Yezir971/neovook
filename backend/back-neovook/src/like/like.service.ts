@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Like } from './entity/like.entity';
 import { Repository } from 'typeorm';
@@ -17,13 +17,14 @@ export class LikeService {
             // Vérifie que l'article existe
             const article = await this.articleService.getArticle({ id_post: likeBody.id_post });
             if (!article) {
-                throw new Error("L'article n'existe pas !");
+                throw new HttpException("L'article n'existe pas !", HttpStatus.NOT_FOUND);
             }
 
             // Récupère l'utilisateur
             const user = await this.userService.getUserById(userJwtId);
             if (!user) {
-                throw new Error("Utilisateur non trouvé !");
+                throw new HttpException("Utilisateur non trouvé !", HttpStatus.NOT_FOUND);
+
             }
 
             // Vérifie si le like existe déjà
@@ -35,7 +36,7 @@ export class LikeService {
             });
 
             if (existingLike) {
-                throw new Error("Vous avez déjà liké cet article !");
+                throw new HttpException("Vous avez déjà liké cet article !", HttpStatus.NOT_FOUND);
             }
 
             const newLike = this.likeRepository.create({
@@ -44,10 +45,11 @@ export class LikeService {
             });
 
             await this.likeRepository.save(newLike);
-            return "Like bien ajouté";
+            throw new HttpException('like bien ajouté', HttpStatus.OK);
+
         } catch (error) {
-            console.error('Erreur l\'ajout du like:', error); 
-            throw new Error("Une erreur s'est produite au moment de l'ajout du like.");
+            throw new HttpException("Une erreur s'est produite au moment de l'ajout du like.", HttpStatus.BAD_REQUEST);
+
         }
     }
     async unLikeService(unLikeBody : unLikeBodyDto, userJwtId : string){
@@ -55,13 +57,14 @@ export class LikeService {
             // Vérifie que l'article existe
             const article = await this.articleService.getArticle({ id_post: unLikeBody.id_post });
             if (!article) {
-                throw new Error("L'article n'existe pas !");
+                throw new HttpException("L'article n'existe pas !", HttpStatus.NOT_FOUND);
+
             }
 
             // Récupère l'utilisateur
             const user = await this.userService.getUserById(userJwtId);
             if (!user) {
-                throw new Error("Utilisateur non trouvé !");
+                throw new HttpException("Utilisateur non trouvé !", HttpStatus.NOT_FOUND);
             }
 
             // Vérifie si le like existe déjà
@@ -73,14 +76,15 @@ export class LikeService {
             });
 
             if(!existingLike){
-                throw new Error("Vous n'avez pas encore article !");
+                throw new HttpException("Vous n'avez pas like l'article !", HttpStatus.NOT_FOUND);
+
             }
 
             await this.likeRepository.delete({user_id_who_like: userJwtId,article_id: unLikeBody.id_post})
-            return 'like supprimer'
+            throw new HttpException('like supprimer', HttpStatus.OK);
         } catch (error) {
-            console.error('Erreur de retrait de like:', error); 
-            throw new Error("Une erreur s'est produite au moment du retrait du like.");
+            throw new HttpException("Une erreur s'est produite au moment du retrait du like.", HttpStatus.BAD_REQUEST);
+            
         }
     }
 
@@ -88,7 +92,7 @@ export class LikeService {
         // Vérifie que l'article existe
         const article = await this.articleService.getArticle({ id_post: allLikePost.id_post });
         if (!article) {
-            throw new Error("L'article n'existe pas !");
+            throw new HttpException("L'article n'existe pas !", HttpStatus.NOT_FOUND);
         }
         const allLike = await this.likeRepository.find({
             where: {
@@ -96,10 +100,7 @@ export class LikeService {
             },
             relations: ['user'],
         });
-        
-
-        return allLike
-
+        throw new HttpException(allLike, HttpStatus.OK);
     }
 
 }

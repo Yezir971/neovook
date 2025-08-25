@@ -9,7 +9,6 @@ import type { Request } from 'express';
 export class ArticleController {
     constructor(private readonly articleService: ArticleService){
     }
-    // @Public()
     @Post("create")
     async createArticle(@Body() article : Article){
         return await this.articleService.createArtcile(article)
@@ -31,7 +30,6 @@ export class ArticleController {
     }
 
     // route pour supprimer un article 
-    // @Public()
     @Delete('delete')
     async deleteArticle(@Req() request: Request , @Body() articleBody : articleDeleteBodyDto){
         const userJwt = request['user']

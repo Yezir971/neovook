@@ -30,7 +30,6 @@ export class Login {
       next: (response) => {
         // on sauvegarde le JWT dans les cookies 
         this.cookieService.set('JWT_user', response.access_token )
-
         // redirection 
         this.router.navigate(['/']);
 

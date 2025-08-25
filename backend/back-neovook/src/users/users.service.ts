@@ -15,6 +15,8 @@ export class UsersService {
     }
     async getUser(name: string): Promise<User | null>{
         const user = await this.userRepository.findOneBy({['name'] : name})
+        // throw new HttpException("Utilisateur non trouvé !", HttpStatus.NOT_FOUND);
+
 
         return user
     } 
