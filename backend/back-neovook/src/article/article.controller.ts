@@ -1,14 +1,20 @@
-import { Body, Controller, Delete, Patch, Post, Req } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Patch, Post, Req } from '@nestjs/common';
 import { ArticleService } from './article.service';
 import { Article } from './entity/article.entity';
 import { Public } from 'src/common/decorators/public.decorator';
-import type { articleDeleteBodyDto, articleUpdateBodyDto } from 'src/models/article.models';
+import type { articleDeleteBodyDto, articleUpdateBodyDto, getArticle } from 'src/models/article.models';
 import type { Request } from 'express';
 
 @Controller('api/article')
 export class ArticleController {
     constructor(private readonly articleService: ArticleService){
     }
+
+    @Get('get')
+    async getAllArticle(){
+        return await this.articleService.getallArticle()
+    }
+
     @Post("create")
     async createArticle(@Body() article : Article){
         return await this.articleService.createArtcile(article)

@@ -21,7 +21,6 @@ export class Signup {
   messageSucces : string = ""
 
   onSubmit(){
-    console.log("hello");
     const body = {
       "email": this.email, 
       "name": this.name,

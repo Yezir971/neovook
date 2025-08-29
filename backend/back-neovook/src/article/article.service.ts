@@ -2,7 +2,7 @@ import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Article } from './entity/article.entity';
 import { Repository } from 'typeorm';
-import { articleDeleteBodyDto, articleUpdateBodyDto } from 'src/models/article.models';
+import { articleDeleteBodyDto, articleUpdateBodyDto, getArticle } from 'src/models/article.models';
 
 @Injectable()
 export class ArticleService {
@@ -51,6 +51,10 @@ export class ArticleService {
 
     async getArticleById(articleId : string){
         return this.articleRepository.findOneBy({['id_post'] : articleId})
+    }
+
+    async getallArticle() {
+        return this.articleRepository.find()
     }
 
 
