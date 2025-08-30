@@ -1,0 +1,213 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/api/users/get": {
+      "get": {
+        "operationId": "UsersController_getUsers",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Users"
+        ]
+      }
+    },
+    "/api/user/create": {
+      "post": {
+        "operationId": "UsersController_createUser",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Users"
+        ]
+      }
+    },
+    "/api/auth/login": {
+      "post": {
+        "operationId": "AuthController_getAuth",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Auth"
+        ]
+      }
+    },
+    "/api/auth/profils": {
+      "get": {
+        "operationId": "AuthController_getprofile",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Auth"
+        ]
+      }
+    },
+    "/api/auth/verify": {
+      "get": {
+        "operationId": "AuthController_verifyToken",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Auth"
+        ]
+      }
+    },
+    "/api/article/get": {
+      "get": {
+        "operationId": "ArticleController_getAllArticle",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Article"
+        ]
+      }
+    },
+    "/api/article/create": {
+      "post": {
+        "operationId": "ArticleController_createArticle",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Article"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Article"
+        ]
+      }
+    },
+    "/api/article/update": {
+      "patch": {
+        "operationId": "ArticleController_updateArticle",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Article"
+        ]
+      }
+    },
+    "/api/article/delete": {
+      "delete": {
+        "operationId": "ArticleController_deleteArticle",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Article"
+        ]
+      }
+    },
+    "/api/like/all": {
+      "get": {
+        "operationId": "LikeController_getAllLikeByPost",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Like"
+        ]
+      }
+    },
+    "/api/like/add": {
+      "put": {
+        "operationId": "LikeController_addLike",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Like"
+        ]
+      }
+    },
+    "/api/like/remove": {
+      "delete": {
+        "operationId": "LikeController_removeLike",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Like"
+        ]
+      }
+    }
+  },
+  "info": {
+    "title": "Api neovook",
+    "description": "Enssembles des routes de neovook",
+    "version": "1.0",
+    "contact": {}
+  },
+  "tags": [],
+  "servers": [],
+  "components": {
+    "schemas": {
+      "User": {
+        "type": "object",
+        "properties": {}
+      },
+      "Article": {
+        "type": "object",
+        "properties": {}
+      }
+    }
+  }
+}

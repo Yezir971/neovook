@@ -7,21 +7,19 @@ import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'neo-navbar',
-  imports: [RouterLink,CommonModule],
+  imports: [RouterLink, CommonModule],
   templateUrl: './navbar.html',
-  styleUrl: './navbar.css'
+  styleUrl: './navbar.css',
 })
 export class Navbar {
-  constructor(private cookieService: CookieService) { }
-  private router = inject(Router);
-  private authService = inject(Auth)
-  isAuthentificated$ : Observable<boolean> = this.authService.isAuthenticated()
+  private authService = inject(Auth);
+  private readonly router = inject(Router);
 
-  logOut(){
-    // on supprime le JWT dans les cookies 
-    this.cookieService.delete('JWT_user')
-    // redirection 
+  isLoggedIn$ = this.authService.isLoggedIn$;
+
+  logOut() {
+    this.authService.logOut();
+    // redirection
     this.router.navigate(['/']);
   }
-
 }
