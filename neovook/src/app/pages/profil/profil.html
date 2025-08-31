@@ -1,0 +1,35 @@
+<div class="container">
+  <h1>Page Profil</h1>
+
+  <h2>Ajouter un post</h2>
+  <form class="container">
+    <div class="form-floating">
+      <div class="form-floating mb-3">
+        <input
+          [(ngModel)]="title"
+          name="title"
+          type="text"
+          class="form-control"
+          id="floatingInput"
+          placeholder="Un jolie titre"
+        />
+        <label for="floatingInput">titre du post</label>
+      </div>
+    </div>
+
+    <div class="form-floating">
+      <textarea
+        [(ngModel)]="body"
+        name="body"
+        class="form-control"
+        placeholder="Leave a comment here"
+        id="floatingTextarea2"
+        style="height: 100px"
+      ></textarea>
+      <label for="floatingTextarea2">Exprime toi !</label>
+    </div>
+    <neo-input-submit (click)="onSubmit()" />
+  </form>
+  <h2>Vos posts</h2>
+  <neo-list-post [postData]="postData" [profileData]="profileData" (idpostUpdateOrRemove)="refresh($event)"></neo-list-post>
+</div>

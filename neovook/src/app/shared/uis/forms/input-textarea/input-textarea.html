@@ -1,1 +1,12 @@
-<p>input-textarea works!</p>
+<div class="form-floating">
+  <textarea
+    [(ngModel)]="comment"
+    name="comment"
+    class="form-control"
+    placeholder="Leave a comment here"
+    id="floatingTextarea2"
+    style="height: 100px"
+  ></textarea>
+  <label for="floatingTextarea2">Exprime toi !</label>
+</div>
+<p>{{ comment }}</p>

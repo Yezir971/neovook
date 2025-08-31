@@ -1,0 +1,23 @@
+@if (postData().length == 0) {
+<p>Vous n'avez aucun posts</p>
+}@else { @for (item of postData() ; track $index) {
+<div class="card text-center">
+  <div class="card-header">Crée par : {{ item.id_user_who_post.name }}</div>
+  <div class="card-body">
+    <h5 class="card-title">{{ item.title }}</h5>
+    <p class="card-text">{{ item.body }}</p>
+    <span>
+      <button type="button" class="btn btn-primary">J'aime</button>
+      @if(profileData().id_user === item.id_user_who_post.id_user) {
+      <button type="button" class="btn btn-secondary">Editer</button>
+      <button type="button" (click)="removeArticle(item.id_post)" class="btn btn-danger">
+        Supprimer
+      </button>
+      }
+    </span>
+  </div>
+  <div class="card-footer text-body-secondary">
+    {{ item.edit_at == null ? 'Post créé le ' + item.create_at : 'Post édité le ' + item.edit_at }}
+  </div>
+</div>
+} }

@@ -1,20 +1,3 @@
-
 <div class="container">
-  @for (item of data ; track $index) {
-    <div class="card text-center">
-      <div class="card-header">
-        {{ item.id_user_who_post }}
-      </div>
-      <div class="card-body">
-        <h5 class="card-title">{{ item.title }}</h5>
-        <p class="card-text">{{ item.body }}</p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
-      </div>
-      <div class="card-footer text-body-secondary">
-        {{ item.edit_at}}
-      </div>
-    </div>
-  }
-
-
+  <neo-list-post [postData]="data" [profileData]="profileData" (idpostUpdateOrRemove)="refresh($event)"></neo-list-post>
 </div>

@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "paths": {
-    "/api/users/get": {
+    "/api/user/profile": {
       "get": {
         "operationId": "UsersController_getUsers",
         "parameters": [],
@@ -53,20 +53,6 @@
         ]
       }
     },
-    "/api/auth/profils": {
-      "get": {
-        "operationId": "AuthController_getprofile",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": ""
-          }
-        },
-        "tags": [
-          "Auth"
-        ]
-      }
-    },
     "/api/auth/verify": {
       "get": {
         "operationId": "AuthController_verifyToken",
@@ -84,6 +70,20 @@
     "/api/article/get": {
       "get": {
         "operationId": "ArticleController_getAllArticle",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Article"
+        ]
+      }
+    },
+    "/api/article/user/get": {
+      "get": {
+        "operationId": "ArticleController_getArticleUser",
         "parameters": [],
         "responses": {
           "200": {

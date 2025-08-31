@@ -5,25 +5,31 @@ import { authGuard } from './guard/auth-guard';
 import { Signup } from './pages/signup/signup';
 import { publicGuardGuard } from './guard/public-guard-guard';
 import { Post } from './pages/post/post';
+import { Profil } from './pages/profil/profil';
 
 export const routes: Routes = [
-    {
-        path:"",
-        component: Home
-    }, 
-    {
-        path:"inscription",
-        component: Signup,
-        canActivate: [publicGuardGuard]
-    }, 
-    {
-        path:"connexion",
-        component: Login,
-        canActivate: [publicGuardGuard]
-    }, 
-    {
-        path:"post",
-        component: Post,
-        canActivate: [authGuard]
-    }, 
+  {
+    path: '',
+    component: Home,
+  },
+  {
+    path: 'inscription',
+    component: Signup,
+    canActivate: [publicGuardGuard],
+  },
+  {
+    path: 'connexion',
+    component: Login,
+    canActivate: [publicGuardGuard],
+  },
+  {
+    path: 'post',
+    component: Post,
+    canActivate: [authGuard],
+  },
+  {
+    path: 'profil',
+    component: Profil,
+    canActivate: [authGuard],
+  },
 ];
