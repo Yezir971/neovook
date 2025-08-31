@@ -2,12 +2,13 @@ import { Component, inject, input, output } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { Posts } from '../../../services/post/posts';
 import { HttpHeaders } from '@angular/common/http';
+import { EditModal } from "../../../../shared/uis/modal/edit-modal/edit-modal";
 
 @Component({
   selector: 'neo-list-post',
-  imports: [],
   templateUrl: './list-post.html',
   styleUrl: './list-post.css',
+  imports: [EditModal],
 })
 export class ListPost {
   constructor(private cookieService: CookieService) {}

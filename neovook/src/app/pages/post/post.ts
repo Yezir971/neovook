@@ -3,7 +3,6 @@ import { Posts } from '../../features/services/post/posts';
 import { getallArticle } from '../../models/post';
 import { CookieService } from 'ngx-cookie-service';
 import { HttpHeaders } from '@angular/common/http';
-import { RouterLink } from '@angular/router';
 import { ListPost } from "../../features/post/components/list-post/list-post";
 
 @Component({

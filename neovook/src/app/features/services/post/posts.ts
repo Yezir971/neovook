@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../../../../environment';
 import { Observable } from 'rxjs';
-import { getallArticle } from '../../../models/post';
+import { articleUpdateBodyDto, getallArticle } from '../../../models/post';
 
 @Injectable({
   providedIn: 'root',
@@ -21,6 +21,10 @@ export class Posts {
     });
     return data;
   }
+
+  
+
+  
   getProfile(headers: HttpHeaders): Observable<any> {
     return this.httpClient.get<any>(`${this.urlApi}/user/profile`, { headers });
   }
@@ -33,5 +37,9 @@ export class Posts {
     headers: HttpHeaders
   ): Observable<any> {
     return this.httpClient.post<any>(`${this.urlApi}/article/create`, data, { headers });
+  }
+
+  updateArticle(data: articleUpdateBodyDto, headers: HttpHeaders): Observable<any> {
+    return this.httpClient.patch<any>(`${this.urlApi}/article/update`, data, { headers });
   }
 }

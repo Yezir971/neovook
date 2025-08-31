@@ -9,7 +9,7 @@
     <span>
       <button type="button" class="btn btn-primary">J'aime</button>
       @if(profileData().id_user === item.id_user_who_post.id_user) {
-      <button type="button" class="btn btn-secondary">Editer</button>
+      <neo-edit-modal [dataPost]="item" ></neo-edit-modal>
       <button type="button" (click)="removeArticle(item.id_post)" class="btn btn-danger">
         Supprimer
       </button>

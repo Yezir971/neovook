@@ -73,8 +73,7 @@ export class Profil {
     let post = { title: this.title, body: this.body, create_at: new Date() };
     return this.postService.createPost(post, headers).subscribe({
       next: (res) => {
-        this.postData.push(post);
-        console.log(res);
+        this.getPosts();
       },
       error: (err) => {
         console.log(err);
