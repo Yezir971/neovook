@@ -31,5 +31,5 @@
     <neo-input-submit (click)="onSubmit()" />
   </form>
   <h2>Vos posts</h2>
-  <neo-list-post [postData]="postData" [profileData]="profileData" (idpostUpdateOrRemove)="refresh($event)"></neo-list-post>
+  <neo-list-post [postData]="posts$ | async" [profileData]="profileData" (idpostUpdateOrRemove)="refresh($event)"></neo-list-post>
 </div>

@@ -28,10 +28,11 @@ export class ArticleService {
     try {
       const newArticle = this.articleRepository.create(article);
       await this.articleRepository.save(newArticle);
+      const dataResponse = await this.getArticle(newArticle);
       return {
         statusCode: HttpStatus.CREATED,
         message: 'Article ajouté avec succès',
-        data: newArticle,
+        data: dataResponse,
       };
     } catch (error) {
       console.error("Erreur création de l' article:", error);
@@ -53,6 +54,7 @@ export class ArticleService {
       return {
         statusCode: HttpStatus.OK,
         message: 'article modifier avec succès',
+        data: await this.getArticleById(article.id_post),
       };
     } catch (error) {
       console.error("Erreur de la modification de l' article:", error);

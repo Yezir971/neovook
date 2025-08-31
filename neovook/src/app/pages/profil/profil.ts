@@ -6,10 +6,11 @@ import { Posts } from '../../features/services/post/posts';
 import { CookieService } from 'ngx-cookie-service';
 import { HttpHeaders } from '@angular/common/http';
 import { ListPost } from '../../features/post/components/list-post/list-post';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'neo-profil',
-  imports: [InputSubmit, FormsModule, ListPost],
+  imports: [InputSubmit, FormsModule, ListPost, AsyncPipe],
   templateUrl: './profil.html',
   styleUrl: './profil.css',
 })
@@ -22,10 +23,17 @@ export class Profil {
   messageError: string = '';
   profileData: any = {};
   idpostUpdateOrRemove: string = '';
+  posts$ = this.postService.posts$;
 
   ngOnInit() {
+    const auth_token = this.cookieService.get('JWT_user');
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${auth_token}`,
+    });
     this.getProfile();
-    this.getPosts();
+    this.postService.getAllPostUser(headers);
+    
   }
   refresh(id: string) {
     this.postData = this.postData.filter((post) => post.id_post !== id);
@@ -48,21 +56,6 @@ export class Profil {
     });
   }
 
-  getPosts() {
-    const auth_token = this.cookieService.get('JWT_user');
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${auth_token}`,
-    });
-    return this.postService.getAllPostUser(headers).subscribe({
-      next: (res) => {
-        this.postData = res;
-      },
-      error: (err) => {
-        this.messageError = 'Erreur lors de la récupération des posts' + err;
-      },
-    });
-  }
 
   onSubmit() {
     const auth_token = this.cookieService.get('JWT_user');
@@ -73,7 +66,8 @@ export class Profil {
     let post = { title: this.title, body: this.body, create_at: new Date() };
     return this.postService.createPost(post, headers).subscribe({
       next: (res) => {
-        this.getPosts();
+        this.title = '';
+        this.body = '';
       },
       error: (err) => {
         console.log(err);
