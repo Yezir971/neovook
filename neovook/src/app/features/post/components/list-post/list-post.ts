@@ -17,6 +17,15 @@ export class ListPost {
   readonly profileData = input<any>();
   readonly idpostUpdateOrRemove = output<string>();
 
+
+  like(id: string){
+    console.log(id);
+  }
+
+  unlike(id: string){
+
+  }
+
   removeArticle(id: string) {
     const auth_token = this.cookieService.get('JWT_user');
     const headers = new HttpHeaders({

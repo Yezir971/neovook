@@ -6,8 +6,9 @@
   <div class="card-body">
     <h5 class="card-title">{{ item.title }}</h5>
     <p class="card-text">{{ item.body }}</p>
-    <span>
-      <button type="button" class="btn btn-primary">J'aime</button>
+    <span class="d-flex justify-content-between ">
+      <button type="button" class="btn btn-primary" (click)="like(item.id_post)">J'aime</button>
+      <button type="button" class="btn btn-primary">Qui a aimer ?</button>
       @if(profileData().id_user === item.id_user_who_post.id_user) {
       <neo-edit-modal [dataPost]="item" ></neo-edit-modal>
       <button type="button" (click)="removeArticle(item.id_post)" class="btn btn-danger">
