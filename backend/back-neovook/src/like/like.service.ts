@@ -45,7 +45,10 @@ export class LikeService {
             });
 
             await this.likeRepository.save(newLike);
-            throw new HttpException('like bien ajouté', HttpStatus.OK);
+            return {
+                statusCode: HttpStatus.OK,
+                message: 'like bien ajouté',
+            };
 
         } catch (error) {
             throw new HttpException("Une erreur s'est produite au moment de l'ajout du like.", HttpStatus.BAD_REQUEST);
@@ -81,7 +84,10 @@ export class LikeService {
             }
 
             await this.likeRepository.delete({user_id_who_like: userJwtId,article_id: unLikeBody.id_post})
-            throw new HttpException('like supprimer', HttpStatus.OK);
+            return {
+                statusCode: HttpStatus.OK,
+                message: 'like supprimer',
+            };
         } catch (error) {
             throw new HttpException("Une erreur s'est produite au moment du retrait du like.", HttpStatus.BAD_REQUEST);
             

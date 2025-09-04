@@ -16,7 +16,6 @@ export class LikeController {
     @Put('add')
     async addLike(@Body() likeBody : LikeAddBodyDto, @Req() request: Request ){
         const userJwtId = request['user'].userId
-        
         return await this.likeService.addLike(likeBody, userJwtId)
     }
 

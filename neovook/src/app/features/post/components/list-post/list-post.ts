@@ -16,13 +16,52 @@ export class ListPost {
   readonly postData = input<any>();
   readonly profileData = input<any>();
   readonly idpostUpdateOrRemove = output<string>();
-
-
+  
+  isLiked = false
+  
+  
   like(id: string){
-    console.log(id);
+    const auth_token = this.cookieService.get('JWT_user');
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${auth_token}`,
+    });
+    const data = {
+      id_post: id
+    }
+    this.isLiked = true
+    this.postService.likeArticle(data, headers).subscribe({
+      next: (res) => {
+        console.log(res.message);
+      }, 
+      error:  (err) => {
+        console.log("une erreur s'est produite au moment d'ajouter le like de l'article : " + err.message);
+      }
+    })
+    
   }
-
+  
   unlike(id: string){
+    
+    const auth_token = this.cookieService.get('JWT_user');
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${auth_token}`,
+    });
+    const data = {
+      id_post: id
+    }
+    this.isLiked = false
+    this.postService.unLikeArticle(data, headers).subscribe({
+      next: (res) => {
+        console.log(res.message);
+        
+      },
+      error : (err)=> {
+        console.log("Errur au moment de retirer le like de l'article !" + err.message);
+        
+      }
+    })
 
   }
 

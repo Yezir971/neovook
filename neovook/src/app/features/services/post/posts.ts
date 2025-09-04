@@ -3,6 +3,7 @@ import { inject, Injectable } from '@angular/core';
 import { environment } from '../../../../environment';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { articleUpdateBodyDto, getallArticle } from '../../../models/post';
+import { LikeBodyDto } from '../../../models/like';
 
 @Injectable({
   providedIn: 'root',
@@ -16,6 +17,7 @@ export class Posts {
 
   private wordPostSubject = new BehaviorSubject<getallArticle[]>([]);
   wordPost$ = this.wordPostSubject.asObservable();
+
 
   getAllpost(headers: HttpHeaders) {
     this.httpClient.get<getallArticle[]>(`${this.urlApi}/article/get`, { headers }).subscribe((posts) =>{
@@ -55,7 +57,6 @@ export class Posts {
   ): Observable<any> {
     return this.httpClient.post<any>(`${this.urlApi}/article/create`, data, { headers }).pipe(
       tap((newPost) => {
-        console.log(newPost);
         
         const currentPosts = this.postsSubject.value;
         this.postsSubject.next([...currentPosts, newPost.data]); 
@@ -83,5 +84,11 @@ export class Posts {
 
       })
     );
+  }
+  likeArticle(data : LikeBodyDto, headers: HttpHeaders) : Observable<any>{
+    return this.httpClient.put<any>(`${this.urlApi}/like/add`, data, { headers })
+  }
+  unLikeArticle(data : LikeBodyDto, headers: HttpHeaders) : Observable<any>{
+    return this.httpClient.delete<any>(`${this.urlApi}/like/remove`, { headers, body: data })
   }
 }
