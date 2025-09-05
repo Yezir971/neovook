@@ -9,8 +9,6 @@ export class LikeController {
     @Get('all')
     async getAllLikeByPost(@Body() allLikePost: AllLikePost){
         return this.likeService.getAllLikeByPost(allLikePost)
-
-
     }
 
     @Put('add')

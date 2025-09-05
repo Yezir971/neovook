@@ -106,7 +106,10 @@ export class LikeService {
             },
             relations: ['user'],
         });
-        throw new HttpException(allLike, HttpStatus.OK);
+        return {
+            message : allLike,
+            status : HttpStatus.OK
+        }
     }
 
 }

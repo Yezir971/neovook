@@ -11,7 +11,9 @@ import { EditModal } from "../../../../shared/uis/modal/edit-modal/edit-modal";
   imports: [EditModal],
 })
 export class ListPost {
-  constructor(private cookieService: CookieService) {}
+  constructor(private cookieService: CookieService) {
+    this.getAllLike()
+  }
   private readonly postService = inject(Posts);
   readonly postData = input<any>();
   readonly profileData = input<any>();
@@ -19,6 +21,11 @@ export class ListPost {
   
   isLiked = false
   
+  getAllLike(){
+    console.log( this.postData);
+    
+    
+  }
   
   like(id: string){
     const auth_token = this.cookieService.get('JWT_user');
